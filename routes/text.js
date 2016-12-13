@@ -4,33 +4,30 @@ var router = express.Router();
 var T = require('../models/text'); //use the schema
 
 router.get('/', function(req, res) {
-	res.render('welcome');
+	res.render('view');
 });
 
-// router.get('/welcome', function(req, res) {
-// 	res.render('welcome');
-// });
+router.get('/profile', function(req, res) {
+	res.render('profile');
+});
 
-// router.get('/signup', function(req, res) {
-// 	res.render('signup');
-// });
+router.get('/text', function(req, res) {
+	res.render('sound');
+});
 
-// router.get('/play', function(req, res) {
-// 	res.render('text-submit');
-// });
-// router.get('/play', function(req, res) {
-// 	res.render('profile');
-// });
+router.get('/textsubmit', function(req, res) {
+	res.render('text-submit');
+});
 
-router.post('/play', function(req, res) {
-	console.log(req.text);
+router.post('/textsubmit', function(req, res) {
+	console.log(req.body.text);
 	var textSubmit = new T({
 		dateCreated: req.body.date,
 		text: req.body.text
 	});
 	textSubmit.save(function(err, data) {
 		if (err) {
-			return res.redirect(303, '/play');
+			return res.redirect(303, '/textsubmit');
 		}
 		res.redirect('/profile');
 	});

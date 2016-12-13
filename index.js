@@ -69,11 +69,11 @@ auth.registerRoutes();
 // });
 
 //
-app.get('/profile', function(req, res) {
-	res.render('profile', {
-		msg: 'You have a treat: ' + req.session.treat
-	});
-});
+// app.get('/profile', function(req, res) {
+// 	res.render('profile', {
+// 		msg: 'You have a treat: ' + req.session.treat
+// 	});
+// });
 
 // app.get('/treat', function(req, res) {
 
@@ -104,15 +104,15 @@ app.get('/profile', function(req, res) {
 // 	};
 // });
 
-app.get('/clear', function(req, res) {
-	delete req.session.treat;
-	req.session.flash = {
-		type: 'negative', 
-		header: 'No treat',
-		body: 'The bag is empty'
-	};
-	res.redirect('/');
-});
+// app.get('/clear', function(req, res) {
+// 	delete req.session.treat;
+// 	req.session.flash = {
+// 		type: 'negative', 
+// 		header: 'No treat',
+// 		body: 'The bag is empty'
+// 	};
+// 	res.redirect('/');
+// });
 
 // start server
 app.listen(PORT, function() {

@@ -6,6 +6,9 @@
   <!-- semantic UI -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
   <style type="text/css">
+  body{
+    margin: 5vh;
+  }
   .grid {
     height: 80%;
   }
@@ -14,70 +17,59 @@
 <body>
 {{#if user}}
   <div class="ui middle aligned center aligned grid">
-    <div class="ui fixed inverted main menu">
-      <h1 class="item header"><a href="/profile">Decrypting</a></h1>
-      <div class="right menu">
-        <a href="/play" class="item">Play</a>
-        <a href="/profile" class="item">{{user.username}}</a>
-        <a href="/logout" class="item">Logout</a>
-      </div> 
-    </div>
-    <div class="row">
-        <div class="column">
-          {{{body}}}
-        </div>
-    </div> 
-  </div>    
-{{else}}
-<div class="ui middle aligned center aligned grid">
-  <h1 class="ui header">Welcome</h1>
-    <div>
-      <h2>{{message}}</h2>
-    </div>
-</div>
-  <div class="ui middle aligned center aligned grid">  
-    <div class="ui card">
-      <div class="content">
-        <h1 class="header">Sign up</h1>
-        <form class="ui form" method="post" >
-    <div class="field">
-      <label>Username</label>
-      <input type="text" name="username" placeholder="username">
-    </div>
-    <div class="field">
-      <label>Password</label>
-      <input type="password" name="password" placeholder="password">
-    </div>
-    <button class="ui button" type="submit">Submit</button>
-  </form>
-      </div>
-    </div>
-      <div class="ui card">
-      <div class="content">
-        <h1 class="header">Login</h1>
-        <form class="ui form" method="post" >
-    <div class="field">
-      <label>Username</label>
-      <input type="text" name="username" placeholder="username">
-    </div>
-    <div class="field">
-      <label>Password</label>
-      <input type="password" name="password" placeholder="password">
-    </div>
-    <button class="ui button" type="submit">Submit</button>
-  </form>
-      </div>
-    </div>
+      <div class="ui fixed inverted main menu">
+          <h1 class="item header"><a href="/sound">Decrypting</a></h1>
+          <div class="right menu">
+            <a href="/text" class="item">Play</a>
+            <a href="/profile" class="item">{{user.username}}</a>
+            <a href="/logout" class="item">Logout</a>
+          </div> 
+     </div>
+  </div>  
+  <div class="row">
+  <div class="column">
+    {{{body}}}
+  </div>
 </div>  
-{{/if}}
-{{!--       </div>
-    </div> --}}
-{{!--     <div class="row">
-      <div class="column">
-        {{{body}}}
+{{else}}
+  <div class="ui middle aligned center aligned grid">
+      <h1 class="ui header"><a href="/">Welcome</a></h1>
+      <div class="ui card">
+        <div class="content">
+          <h1 class="header">Sign up</h1>
+          <form action="/signup" class="ui form" method="post" >
+            <div class="field">
+              <label>Username</label>
+              <input type="text" name="username" placeholder="username">
+            </div>
+            <div class="field">
+              <label>Password</label>
+              <input type="password" name="password" placeholder="password">
+            </div>
+            <button class="ui button" type="submit">Submit</button>
+          </form>
+        </div>
       </div>
-    </div>
-    </div> --}}
+      <div class="ui card">
+        <div class="content">
+          <h1 class="header">Login</h1>
+            <form action="/login" class="ui form" method="post" >
+              <div class="field">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="username">
+              </div>
+              <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="password">
+              </div>
+              <button class="ui button" type="submit">Submit</button>
+            </form>
+        </div>
+      </div>
+  </div>  
+{{/if}}
+
+
   {{#if flash}}
     <div class="ui {{flash.type}} message">
       <i class="close icon"></i>
