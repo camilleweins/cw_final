@@ -23,11 +23,7 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 
-var api = require('./routes/api');
-app.use('/api', api);
 
-var T = require('./routes/text');
-app.use('/', T);
 
 mongoose.connect(process.env.DB_URL);
 
@@ -56,7 +52,7 @@ app.use(function(req, res, next) {
 });
 
 //req as a function and pass app as a parameter
-var auth = require('.//lib/auth')(app, options);
+var auth = require('./lib/auth')(app, options);
 auth.init(); //setup middleware related to authentication
 auth.registerRoutes();
 
@@ -113,7 +109,11 @@ auth.registerRoutes();
 // 	};
 // 	res.redirect('/');
 // });
+var api = require('./routes/api');
+app.use('/api', api);
 
+var T = require('./routes/text');
+app.use('/', T);
 // start server
 app.listen(PORT, function() {
   console.log('listening on port ', PORT);
