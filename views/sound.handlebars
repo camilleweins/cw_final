@@ -1,6 +1,11 @@
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/p5.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/addons/p5.dom.js"></script>
+
     <p>
        <p>
-            <textarea id="textinput" rows="10" cols="100">Enter some text</textarea>
+            <textarea id="textinput" rows="10" cols="100" maxlength="150" placeholder="Enter some text"></textarea>
+              <span id="chars">150</span> characters left
             <br/>
         </p>
         <p>
@@ -13,46 +18,56 @@
         <p>
             <button id="submit">run the regex</button>
         </p>
+        <script>
+  var maxLength = 150;
+  $('textarea').keyup(function() {
+    var length = $(this).val().length;
+    var length = maxLength - length;
+    $('#chars').text(length);
+  });
+  </script>
 <script type="text/javascript">
-    // A2Z F15
-// Daniel Shiffman
-// https://github.com/shiffman/
+var bpm;
+
 
 // Here is where we are working with a regex
 function process(txt) {
 
-  var flags = '';
-  if (globalCheck.elt.checked) {
-    flags += 'g';
-  }
-  if (caseCheck.elt.checked) {
-    flags += 'i';
-  }
+  var flags = 'g';
   
   var regex = new RegExp(regexInput.value(), flags);
+
+//  var regex = new RegExp(regexInput.value(), flags);
+  
+  //[aeiouy] match any vowel
+  console.log(txt);
+  // eg /e/g
   console.log(regex);  
 
   var results = txt.match(regex);
   console.log(results);
-  var osc = new p5.Oscillator;
-  osc.setType('sine');
-
-  var e = osc.freq(349.23);
-  e = '/e/g';
-
-  if (e == results) {
-    osc.start();
-  }
-
-  var output = '';
+    
+  var output = '';  
   if (results) {
     for (var i = 0; i < results.length; i++) {
+      output = results[i];
+      
+      //PUT TONE STUFF HERE
+//      var sequence = output;
+      var sequence = new Tone.Sequence(function(output) {
+        
+      });
+      
+      Tone.Transport.bpm = bpm;
       output += results[i] + '<br/>';
-    }
-  } else {
-    output = 'No matches found';
+      console.log(output);
   }
-
+    } else {
+      console.log(output);
+    //output = 'No matches found';
+  }
+  
+  // puts the output list in a <p> element
   var par = createP(output);
   par.class('text');
   paragraphs.push(par);
@@ -76,32 +91,27 @@ var paragraphs = [];
 var inputText = '';
 
 function setup() {
-
   noCanvas();
 
+  bpm = select('#textinput');
+  console.log(bpm);
+  
   // Selecting the text field and button
   input = select('#textinput');
   button = select('#submit');
+  
   // What to do when button pressed
   button.mousePressed(handleInput);
   console.log(button);
+  
+  // input is the regex field
   regexInput = select('#regex');
-  globalCheck = select('#global');
-  caseCheck = select('#case');
+  
 }
-
 
 // Handle the text input field
 function handleInput() {
-  var result = process(input.value());
-  //console.log(result);
+  process(input.value());
 }
-
-// function playInput() {
-//   osc = p5.sinOsc;
-//     osc.freq(349.23);
-//     osc.start();
-// }
-
 
 </script>

@@ -11,6 +11,10 @@ router.get('/profile', function(req, res) {
 	res.render('profile');
 });
 
+router.get('/gallery', function(req, res) {
+	res.render('gallery');
+});
+
 router.get('/text', function(req, res) {
 	res.render('sound');
 });
